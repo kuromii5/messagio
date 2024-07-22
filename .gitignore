@@ -1,4 +1,2 @@
-/vendor.protogen
 /pkg/messagio/v1
-/bin
 .env
