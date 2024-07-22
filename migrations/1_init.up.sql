@@ -1,0 +1,6 @@
+CREATE TABLE messages(
+    id SERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    processed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

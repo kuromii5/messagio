@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package messagio_v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/kuromii5/messagio/v1;messagio_v1";
+
+service MessageService {
+    rpc SendMessage (SendMessageRequest) returns (SendMessageResponse) {
+        option (google.api.http) = {
+            post: "/v1/send_message"
+            body: "*"
+        };
+    }
+    rpc GetMessages (GetMessagesRequest) returns (GetMessagesResponse) {
+        option (google.api.http) = {
+            get: "/v1/get_messages"
+        };
+    }
+    rpc GetStats (GetStatsRequest) returns (GetStatsResponse) {
+        option (google.api.http) = {
+            get: "/v1/stats"
+        };
+    }
+}
+
+// Send message
+message SendMessageRequest {
+    string message = 1;
+}
+message SendMessageResponse {
+    int32 status_code = 1;
+    string message = 2;
+}
+
+// Get messages
+message GetMessagesRequest {}
+message GetMessagesResponse {
+    repeated string messages = 1;
+}
+
+// Get Stats
+message GetStatsRequest {}
+message GetStatsResponse {
+    int32 processed_count = 1;
+}
