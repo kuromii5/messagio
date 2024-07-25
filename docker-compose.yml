@@ -1,5 +1,6 @@
 services:
   zookeeper:
+    restart: always
     image: confluentinc/cp-zookeeper:latest
     environment:
       ZOOKEEPER_CLIENT_PORT: ${ZOOKEEPER_CLIENT_PORT}
@@ -8,6 +9,7 @@ services:
       - "${ZOOKEEPER_CLIENT_PORT}:${ZOOKEEPER_CLIENT_PORT}"
 
   kafka:
+    restart: always
     image: confluentinc/cp-kafka:latest
     ports:
       - "${KAFKA_PORT}:${KAFKA_PORT}"
@@ -20,6 +22,7 @@ services:
       - zookeeper
 
   postgres:
+    restart: always
     image: postgres:latest
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -29,7 +32,7 @@ services:
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   app:
     restart: always
